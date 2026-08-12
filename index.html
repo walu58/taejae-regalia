@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 Taejae University Academic Regalia Design Competition</title>
+<meta name="description" content="Vote for the academic regalia that carries Taejae University's founding spirit. Bachelor's gown, cap and stole — designed by Taejae students and staff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ───────────────────────── tokens ───────────────────────── */
+:root{
+  --ink:#0B1420;        /* gown black-navy */
+  --navy:#14315E;       /* Taejae field navy */
+  --blue:#2F6BFF;       /* interactive accent */
+  --brass:#C0A265;      /* regalia trim — used only on the ballot */
+  --paper:#EDEFF3;      /* cool pattern paper */
+  --white:#fff;
+  --line:rgba(11,20,32,.14);
+  --line-soft:rgba(11,20,32,.08);
+  --muted:#5A6577;
+  --shadow:0 1px 2px rgba(11,20,32,.05),0 12px 32px -18px rgba(11,20,32,.35);
+  --wrap:1180px;
+  --display:"Instrument Serif",Georgia,serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2.5px solid var(--blue);outline-offset:3px;border-radius:2px}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+/* label / eyebrow */
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:12px;margin:0 0 18px;
+}
+.chev{flex:none;display:block}          /* sleeve-chevron marker */
+.chev path{fill:none;stroke:var(--brass);stroke-width:2}
+
+/* ───────────────────────── header ───────────────────────── */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(237,239,243,.88);
+  backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line-soft);
+}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.mark{display:flex;align-items:center;gap:11px;font-weight:600;font-size:14px;letter-spacing:-.01em}
+.mark .seal{width:26px;height:26px;flex:none}
+.mark small{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;font-weight:400;line-height:1.3}
+nav{display:flex;align-items:center;gap:4px}
+nav a,nav button{
+  background:none;border:0;padding:8px 12px;font-size:13.5px;font-weight:500;
+  text-decoration:none;color:var(--muted);border-radius:6px;
+}
+nav a:hover,nav button:hover{color:var(--ink);background:rgba(11,20,32,.05)}
+@media(max-width:620px){ nav .hide-sm{display:none} .bar{height:58px} }
+
+/* ───────────────────────── hero ───────────────────────── */
+.hero{
+  position:relative;overflow:hidden;background:var(--ink);color:var(--paper);
+  padding:92px 0 76px;
+}
+.hero::before{ /* woven fabric texture */
+  content:"";position:absolute;inset:0;opacity:.5;
+  background:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(-45deg,rgba(255,255,255,.028) 0 1px,transparent 1px 4px),
+    radial-gradient(120% 90% at 78% -20%,rgba(47,107,255,.34),transparent 62%);
+}
+.stole{position:absolute;top:-60px;right:9%;height:150%;width:210px;opacity:.85;pointer-events:none}
+.stole span{
+  position:absolute;top:0;height:100%;width:52px;background:linear-gradient(180deg,var(--navy),rgba(20,49,94,0));
+  border-left:1px solid rgba(192,162,101,.55);border-right:1px solid rgba(192,162,101,.28);
+}
+.stole span:first-child{left:0;transform:rotate(6.5deg);transform-origin:top center}
+.stole span:last-child{right:0;transform:rotate(-6.5deg);transform-origin:top center}
+@media(max-width:900px){.stole{right:-70px;opacity:.5}}
+.hero .wrap{position:relative;z-index:2}
+.hero .eyebrow{color:rgba(237,239,243,.62)}
+h1{
+  font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-height:1.02;
+  font-size:clamp(42px,7.4vw,86px);margin:0 0 22px;max-width:15ch;
+}
+h1 em{font-style:italic;color:#A9C2FF}
+.lede{font-size:clamp(16px,1.9vw,19.5px);line-height:1.62;max-width:56ch;color:rgba(237,239,243,.8);margin:0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;border:1px solid transparent;border-radius:2px;
+  padding:13px 22px;font-size:14px;font-weight:600;letter-spacing:.01em;text-decoration:none;
+  transition:transform .12s ease,background .15s ease,border-color .15s ease,opacity .15s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:#1E57E8}
+.btn-ghost{border-color:rgba(237,239,243,.3);color:var(--paper)}
+.btn-ghost:hover{border-color:var(--paper);background:rgba(255,255,255,.06)}
+.btn-brass{background:var(--brass);color:#221A08}
+.btn-brass:hover{background:#CBAF74}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* ───────────────────────── brief ───────────────────────── */
+section{padding:76px 0}
+.brief{background:var(--white);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.brief-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:start}
+.brief p{margin:0;font-size:17.5px;line-height:1.7;max-width:46ch;color:#243044}
+.specs{border-top:1px solid var(--line)}
+.spec{display:grid;grid-template-columns:132px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.spec dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.spec dd{margin:0;font-size:15.5px;font-weight:500}
+.spec dd small{display:block;font-weight:400;font-size:13.5px;color:var(--muted);margin-top:2px}
+@media(max-width:860px){.brief-grid{grid-template-columns:1fr;gap:36px}}
+@media(max-width:520px){.spec{grid-template-columns:1fr;gap:4px}}
+
+/* ───────────────────────── ballot band ───────────────────────── */
+.ballot{
+  background:var(--navy);color:#fff;border-radius:3px;padding:32px 34px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.ballot::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brass)}
+.ballot h2{font-family:var(--display);font-weight:400;font-size:clamp(23px,3vw,31px);line-height:1.2;margin:0 0 10px;max-width:24ch}
+.ballot p{margin:0;color:rgba(255,255,255,.76);font-size:14.5px;max-width:58ch}
+.ballot .when{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--brass);margin-top:14px;display:block;
+}
+.ballot-side{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+@media(max-width:760px){.ballot{padding:28px 24px}.ballot-side{align-items:flex-start;width:100%}}
+
+/* ───────────────────────── entries ───────────────────────── */
+.entries-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px;flex-wrap:wrap}
+h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,44px);letter-spacing:-.01em;margin:0;line-height:1.1}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.grid + .grid{margin-top:22px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--line-soft);border-radius:3px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.shot{position:relative;aspect-ratio:3/4;background:#DDE2EA;overflow:hidden}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.card:hover .shot img{transform:scale(1.035)}
+.no-img{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:repeating-linear-gradient(45deg,#E3E7ED 0 10px,#DCE1E9 10px 20px);color:#8B95A6;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:16px;
+}
+.tag{
+  position:absolute;top:0;left:0;background:var(--ink);color:#fff;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:6px 11px;
+}
+.card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card-body h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.card-body .by{margin:0;font-size:13px;color:var(--muted)}
+.pdf{
+  margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);border-radius:2px;padding:10px 12px;font-size:13px;font-weight:600;
+  text-decoration:none;background:#fff;transition:background .15s,border-color .15s,color .15s;
+}
+.pdf:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.pdf svg{flex:none}
+
+/* ───────────────────────── modal ───────────────────────── */
+.overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(11,20,32,.62);backdrop-filter:blur(3px);
+  display:flex;align-items:flex-start;justify-content:center;padding:28px 16px;overflow:auto;
+  opacity:0;pointer-events:none;transition:opacity .18s ease;
+}
+.overlay.open{opacity:1;pointer-events:auto}
+.sheet{
+  background:var(--paper);width:100%;max-width:920px;border-radius:4px;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);
+  transform:translateY(10px);transition:transform .22s cubic-bezier(.2,.7,.3,1);margin:auto;
+}
+.overlay.open .sheet{transform:none}
+.sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:26px 28px 0}
+.sheet-head h2{font-family:var(--display);font-weight:400;font-size:clamp(23px,3.4vw,32px);margin:0;line-height:1.15}
+.sheet-head p{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.x{background:none;border:0;font-size:24px;line-height:1;color:var(--muted);padding:4px 8px;border-radius:4px}
+.x:hover{background:rgba(11,20,32,.07);color:var(--ink)}
+.picks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:22px 28px}
+@media(max-width:720px){.picks{grid-template-columns:repeat(2,minmax(0,1fr));padding:18px}}
+.pick{background:#fff;border:1px solid var(--line-soft);border-radius:3px;padding:0;overflow:hidden;text-align:left;position:relative;transition:border-color .15s,box-shadow .15s}
+.pick .shot{aspect-ratio:1/1}
+.pick .name{display:block;padding:9px 11px;font-size:12.5px;font-weight:600;line-height:1.3}
+.pick:hover{border-color:var(--blue)}
+.pick[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.pick[aria-pressed="true"]::after{
+  content:"✓";position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+  background:var(--blue);color:#fff;font-size:13px;display:grid;place-items:center;font-weight:700;
+}
+.sheet-foot{border-top:1px solid var(--line);padding:22px 28px 26px;background:var(--white);border-radius:0 0 4px 4px}
+.field{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+label.lbl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+input[type=email],input[type=password]{
+  flex:1;min-width:240px;font:inherit;font-size:15px;padding:13px 14px;border:1px solid var(--line);
+  border-radius:2px;background:#fff;color:var(--ink);
+}
+input::placeholder{color:#9AA3B2}
+.note{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);margin:12px 0 0}
+.err{color:#B3261E;font-size:13.5px;margin:12px 0 0;font-weight:500;display:none}
+.err.show{display:block}
+
+/* thank you */
+.thanks{max-width:480px;text-align:center;padding:46px 34px 40px;background:var(--paper);border-radius:4px}
+.thanks .seal-lg{width:56px;height:56px;margin:0 auto 20px}
+.thanks h2{font-family:var(--display);font-weight:400;font-size:34px;margin:0 0 10px}
+.thanks p{margin:0 0 26px;color:var(--muted);font-size:15px}
+
+/* admin */
+.adm-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:22px 28px 4px}
+@media(max-width:600px){.adm-stat{grid-template-columns:1fr}}
+.stat{background:#fff;border:1px solid var(--line-soft);border-radius:3px;padding:14px 16px}
+.stat b{display:block;font-family:var(--mono);font-size:26px;font-weight:500;letter-spacing:-.02em}
+.stat span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bars{padding:18px 28px 4px;display:flex;flex-direction:column;gap:10px}
+.row{display:grid;grid-template-columns:1fr 56px;gap:14px;align-items:center}
+.row .name{font-size:13.5px;font-weight:600;margin-bottom:6px}
+.track{height:10px;background:#DDE2EA;border-radius:2px;overflow:hidden}
+.fill{height:100%;background:var(--navy);width:0;transition:width .6s cubic-bezier(.2,.7,.3,1)}
+.row .n{font-family:var(--mono);font-size:15px;text-align:right}
+
+footer{background:var(--ink);color:rgba(237,239,243,.6);padding:44px 0;font-size:13px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer a{color:rgba(237,239,243,.85)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="mark">
+      <svg class="seal" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 9h24M16 9v19M8 9V5h16v4" stroke="#14315E" stroke-width="2" fill="none"/><path d="M6 14h20M6 18h20" stroke="#C0A265" stroke-width="1.5"/></svg>
+      <span>Taejae University<small>Regalia Design Competition</small></span>
+    </div>
+    <nav>
+      <a class="hide-sm" href="#brief">The brief</a>
+      <a href="#entries">Entries</a>
+      <button id="navVote">Vote</button>
+      <button id="navAdmin" title="Organiser access">Admin</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ── hero ── -->
+<div class="hero">
+  <div class="stole" aria-hidden="true"><span></span><span></span></div>
+  <div class="wrap">
+    <p class="eyebrow">
+      <svg class="chev" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><path d="M1 4l10 6 10-6M1 1l10 6 10-6"/></svg>
+      Open call · 2026
+    </p>
+    <h1>The gown that <em>Taejae</em> will graduate in.</h1>
+    <p class="lede">A competition to design the bachelor's regalia — gown, cap and stole — for a university with no fixed campus. Eight entries are on show. The Taejae community decides which one carries our founding spirit.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" id="heroVote">Cast your vote</button>
+      <a class="btn btn-ghost" href="#entries">See the eight entries</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── brief ── -->
+<section class="brief" id="brief">
+  <div class="wrap brief-grid">
+    <div>
+      <p class="eyebrow"><svg class="chev" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><path d="M1 4l10 6 10-6M1 1l10 6 10-6"/></svg> The brief</p>
+      <p>Taejae University asked its own community to design the regalia its graduates will wear — a set that holds the university's founding philosophy and identity in cloth rather than in words. Entries were open to every enrolled student and staff member, working alone or in a team of up to three.</p>
+    </div>
+    <dl class="specs">
+      <div class="spec"><dt>Who</dt><dd>All Taejae students and staff<small>Individually, or in teams of up to three</small></dd></div>
+      <div class="spec"><dt>Submission</dt><dd>10 June – 12 August 2026<small>Entries are now closed</small></dd></div>
+      <div class="spec"><dt>Judging</dt><dd>August 2026<small>Review and winners announced separately</small></dd></div>
+      <div class="spec"><dt>Scope</dt><dd>One complete set<small>Bachelor's gown, cap and stole</small></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ── ballot band ── -->
+<section style="padding-bottom:0">
+  <div class="wrap">
+    <div class="ballot">
+      <div>
+        <h2>Vote for the regalia that carries Taejae's founding spirit.</h2>
+        <p>Your vote decides this one — one vote per Taejae member.</p>
+        <span class="when">Open until 31 August 2026</span>
+      </div>
+      <div class="ballot-side">
+        <button class="btn btn-brass" id="bandVote">Cast your vote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── entries ── -->
+<section id="entries">
+  <div class="wrap">
+    <div class="entries-head">
+      <div>
+        <p class="eyebrow"><svg class="chev" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><path d="M1 4l10 6 10-6M1 1l10 6 10-6"/></svg> Eight entries</p>
+        <h2 class="section-title">The designs on show</h2>
+      </div>
+      <p style="margin:0;color:var(--muted);font-size:14.5px;max-width:38ch">Every entry comes with a written statement explaining the thinking behind the gown, cap and stole.</p>
+    </div>
+    <div class="grid" id="rowA"></div>
+    <div class="grid" id="rowB"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Taejae University · Academic Regalia Design Competition</span>
+    <span>22-8 Changdeokgung 5-gil, Jongno-gu, Seoul · <a href="mailto:info@taejae.ac.kr">info@taejae.ac.kr</a></span>
+  </div>
+</footer>
+
+<!-- ── vote modal ── -->
+<div class="overlay" id="voteModal" role="dialog" aria-modal="true" aria-labelledby="voteTitle">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <h2 id="voteTitle">Pick the image that impressed you most.</h2>
+        <p>Select one design, then confirm with your Taejae email.</p>
+      </div>
+      <button class="x" data-close aria-label="Close">×</button>
+    </div>
+    <div class="picks" id="picks"></div>
+    <div class="sheet-foot">
+      <label class="lbl" for="email">Your Taejae email</label>
+      <div class="field">
+        <input type="email" id="email" placeholder="name@taejae.ac.kr" autocomplete="email" spellcheck="false">
+        <button class="btn btn-primary" id="submitVote">Vote</button>
+      </div>
+      <p class="note">One vote per Taejae member.</p>
+      <p class="err" id="voteErr"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── thank you ── -->
+<div class="overlay" id="thanksModal" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
+  <div class="sheet thanks">
+    <svg class="seal-lg" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#C0A265" stroke-width="1.5"/><path d="M17 28.5l7.5 7.5L39 21" fill="none" stroke="#14315E" stroke-width="3.2" stroke-linecap="square"/></svg>
+    <h2 id="thanksTitle">Thank you for submit!</h2>
+    <p id="thanksMsg">Your vote has been recorded. Results are announced when voting closes on 31 August.</p>
+    <button class="btn btn-primary" data-close style="justify-content:center">Close</button>
+  </div>
+</div>
+
+<!-- ── admin ── -->
+<div class="overlay" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="admTitle">
+  <div class="sheet" style="max-width:660px">
+    <div class="sheet-head">
+      <div>
+        <h2 id="admTitle">Results</h2>
+        <p>Organiser access only. Live tally per entry.</p>
+      </div>
+      <button class="x" data-close aria-label="Close">×</button>
+    </div>
+    <div id="admGate" class="sheet-foot" style="border-top:0;background:transparent;padding-top:22px">
+      <label class="lbl" for="admKey">Organiser password</label>
+      <div class="field">
+        <input type="password" id="admKey" placeholder="••••••••" autocomplete="current-password">
+        <button class="btn btn-primary" id="admGo">Open results</button>
+      </div>
+      <p class="err" id="admErr"></p>
+    </div>
+    <div id="admOut" hidden>
+      <div class="adm-stat">
+        <div class="stat"><b id="sTotal">0</b><span>Votes cast</span></div>
+        <div class="stat"><b id="sVoters">0</b><span>Unique voters</span></div>
+        <div class="stat"><b id="sLead">—</b><span>Leading entry</span></div>
+      </div>
+      <div class="bars" id="bars"></div>
+      <div class="sheet-foot" style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" id="csv">Download CSV</button>
+        <button class="btn" style="border-color:var(--line)" id="refresh">Refresh</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   1. CONFIG — edit this block only
+   ══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  /* Paste the Google Apps Script Web App URL here (see README).
+     Leave empty to run the site in preview mode (votes are not saved). */
+  ENDPOINT: "",
+
+  /* Only these email domains may vote. */
+  ALLOWED_DOMAIN: "@taejae.ac.kr",
+
+  /* Files live next to index.html:  images/image1.jpg …  pdfs/pdf1.pdf …
+     The extension is detected automatically — jpg, png, jpeg or webp all work. */
+  IMG_DIR: "images/",
+  PDF_DIR: "pdfs/",
+  EXTENSIONS: ["jpg","png","jpeg","webp","JPG","PNG"],
+
+  /* Only `title` and `by` need editing. Leave `n` alone — it is the tally key. */
+  ENTRIES: [
+    { n:1, title:"Entry 01", by:"Designer name" },
+    { n:2, title:"Entry 02", by:"Designer name" },
+    { n:3, title:"Entry 03", by:"Designer name" },
+    { n:4, title:"Entry 04", by:"Designer name" },
+    { n:5, title:"Entry 05", by:"Designer name" },
+    { n:6, title:"Entry 06", by:"Designer name" },
+    { n:7, title:"Entry 07", by:"Designer name" },
+    { n:8, title:"Entry 08", by:"Designer name" }
+  ]
+};
+CONFIG.ENTRIES.forEach(e => {
+  e.id  = "E" + e.n;
+  e.img = CONFIG.IMG_DIR + "image" + e.n;   // extension resolved at load time
+  e.pdf = CONFIG.PDF_DIR + "pdf" + e.n + ".pdf";
+});
+
+/* ══════════════════════════════════════════════════════════
+   2. Rendering
+   ══════════════════════════════════════════════════════════ */
+const $ = s => document.querySelector(s);
+const E = CONFIG.ENTRIES;
+
+/* Tries image1.jpg → image1.png → image1.jpeg → image1.webp, then gives up gracefully. */
+window.nextExt = function(img){
+  const tries = CONFIG.EXTENSIONS;
+  let k = Number(img.dataset.k || 0) + 1;
+  if(k < tries.length){
+    img.dataset.k = k;
+    img.src = img.dataset.base + "." + tries[k];
+    return;
+  }
+  const p = img.parentNode;
+  img.remove();
+  p.insertAdjacentHTML("beforeend",
+    '<div class="no-img">Image pending<br>' + img.dataset.base + '.jpg</div>');
+};
+
+function shot(e, i){
+  return `<div class="shot">
+      <span class="tag">${String(i+1).padStart(2,"0")}</span>
+      <img src="${e.img}.${CONFIG.EXTENSIONS[0]}" data-base="${e.img}" data-k="0"
+           alt="${e.title} — gown, cap and stole" loading="lazy" onerror="nextExt(this)">
+    </div>`;
+}
+
+function drawCards(){
+  const card = (e,i) => `<article class="card">
+      ${shot(e,i)}
+      <div class="card-body">
+        <h3>${e.title}</h3>
+        <p class="by">${e.by}</p>
+        <a class="pdf" href="${e.pdf}" target="_blank" rel="noopener">
+          <svg width="13" height="15" viewBox="0 0 13 15" aria-hidden="true"><path d="M1 1h7l4 4v9H1z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v4h4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          Design statement
+        </a>
+      </div>
+    </article>`;
+  $("#rowA").innerHTML = E.slice(0,4).map(card).join("");
+  $("#rowB").innerHTML = E.slice(4,8).map((e,i)=>card(e,i+4)).join("");
+
+  $("#picks").innerHTML = E.map((e,i)=>`
+    <button class="pick" data-id="${e.id}" aria-pressed="false">
+      ${shot(e,i)}<span class="name">${e.title}</span>
+    </button>`).join("");
+}
+drawCards();
+
+/* ══════════════════════════════════════════════════════════
+   3. Modals
+   ══════════════════════════════════════════════════════════ */
+let lastFocus = null;
+function open(id){
+  lastFocus = document.activeElement;
+  $(id).classList.add("open");
+  document.body.style.overflow = "hidden";
+  const f = $(id).querySelector("input,button");
+  if(f) setTimeout(()=>f.focus(),60);
+}
+function close(el){
+  el.classList.remove("open");
+  if(!document.querySelector(".overlay.open")) document.body.style.overflow = "";
+  if(lastFocus) lastFocus.focus();
+}
+document.addEventListener("click", ev => {
+  if(ev.target.matches("[data-close]")) close(ev.target.closest(".overlay"));
+  if(ev.target.classList.contains("overlay")) close(ev.target);
+});
+document.addEventListener("keydown", ev => {
+  if(ev.key === "Escape"){ const o = document.querySelector(".overlay.open"); if(o) close(o); }
+});
+["#heroVote","#bandVote","#navVote"].forEach(s => $(s).addEventListener("click", ()=>open("#voteModal")));
+$("#navAdmin").addEventListener("click", ()=>open("#adminModal"));
+
+/* ══════════════════════════════════════════════════════════
+   4. Voting
+   ══════════════════════════════════════════════════════════ */
+let picked = null;
+$("#picks").addEventListener("click", ev => {
+  const b = ev.target.closest(".pick"); if(!b) return;
+  document.querySelectorAll(".pick").forEach(p => p.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true");
+  picked = b.dataset.id;
+  fail("");
+});
+function fail(msg){ const el = $("#voteErr"); el.textContent = msg; el.classList.toggle("show", !!msg); }
+
+async function post(payload){
+  if(!CONFIG.ENDPOINT) return { ok:false, preview:true };
+  const r = await fetch(CONFIG.ENDPOINT, {
+    method:"POST", redirect:"follow",
+    headers:{ "Content-Type":"text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  });
+  return r.json();
+}
+
+$("#submitVote").addEventListener("click", async () => {
+  const email = $("#email").value.trim().toLowerCase();
+  if(!picked)                                  return fail("Select a design first.");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return fail("Enter a valid email address.");
+  if(!email.endsWith(CONFIG.ALLOWED_DOMAIN))   return fail(`Voting is open to ${CONFIG.ALLOWED_DOMAIN} addresses only.`);
+  fail("");
+  const btn = $("#submitVote"); btn.disabled = true; btn.textContent = "Sending…";
+  try{
+    const res = await post({ action:"vote", entry:picked, email });
+    if(res.preview){
+      $("#thanksMsg").textContent = "Preview mode — connect the results sheet to start saving votes.";
+    }else if(res.status === "updated"){
+      $("#thanksMsg").textContent = "Your earlier vote has been moved to this design. One vote per member still stands.";
+    }else if(res.status === "closed"){
+      return fail("Voting has closed.");
+    }else if(!res.ok){
+      return fail(res.error || "Could not save your vote. Try again in a moment.");
+    }else{
+      $("#thanksMsg").textContent = "Your vote has been recorded. Results are announced when voting closes on 31 August.";
+    }
+    close($("#voteModal")); open("#thanksModal");
+    $("#email").value = ""; picked = null;
+    document.querySelectorAll(".pick").forEach(p => p.setAttribute("aria-pressed","false"));
+  }catch(err){
+    fail("Network error — check your connection and try again.");
+  }finally{ btn.disabled = false; btn.textContent = "Vote"; }
+});
+
+/* ══════════════════════════════════════════════════════════
+   5. Admin results
+   ══════════════════════════════════════════════════════════ */
+let tally = null;
+async function loadResults(){
+  const key = $("#admKey").value;
+  const res = await post({ action:"results", key });
+  if(res.preview){ $("#admErr").textContent = "Preview mode — connect the results sheet first."; $("#admErr").classList.add("show"); return; }
+  if(!res.ok){ $("#admErr").textContent = res.error || "Wrong password."; $("#admErr").classList.add("show"); return; }
+  $("#admErr").classList.remove("show");
+  $("#admGate").hidden = true; $("#admOut").hidden = false;
+  tally = res;
+  const counts = E.map(e => ({ ...e, n: res.counts[e.id] || 0 }));
+  const max = Math.max(1, ...counts.map(c => c.n));
+  const top = counts.slice().sort((a,b)=>b.n-a.n)[0];
+  $("#sTotal").textContent  = res.total;
+  $("#sVoters").textContent = res.voters;
+  $("#sLead").textContent   = res.total ? top.title : "—";
+  $("#bars").innerHTML = counts.map(c => `
+    <div class="row">
+      <div><div class="name">${c.title}</div><div class="track"><div class="fill" style="width:${(c.n/max*100).toFixed(1)}%"></div></div></div>
+      <div class="n">${c.n}</div>
+    </div>`).join("");
+}
+$("#admGo").addEventListener("click", loadResults);
+$("#refresh").addEventListener("click", loadResults);
+$("#admKey").addEventListener("keydown", e => { if(e.key === "Enter") loadResults(); });
+$("#csv").addEventListener("click", () => {
+  if(!tally) return;
+  const rows = [["entry_id","title","votes"], ...E.map(e => [e.id, e.title, tally.counts[e.id] || 0])];
+  const blob = new Blob([rows.map(r => r.join(",")).join("\n")], { type:"text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "regalia-vote-results.csv";
+  a.click();
+});
+</script>
+</body>
+</html>
