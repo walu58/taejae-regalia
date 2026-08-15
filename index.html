@@ -243,8 +243,13 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 
 /* vote picker */
 .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 28px;align-items:start}
-@media(max-width:600px){.picks{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px}}
-.pick{background:#fff;border:1px solid var(--line-soft);border-radius:3px;padding:0;overflow:hidden;text-align:left;position:relative;transition:border-color .15s,box-shadow .15s}
+@media(max-width:600px){.picks{gap:8px;padding:14px}}
+@media(max-width:420px){.picks{gap:6px;padding:12px}.pick .name{padding:6px 7px;font-size:11px}}
+.pick{
+  background:#fff;border:1px solid var(--line-soft);border-radius:3px;padding:0;overflow:hidden;
+  text-align:left;position:relative;cursor:pointer;user-select:none;
+  transition:border-color .15s,box-shadow .15s;
+}
 .pick .shot{aspect-ratio:var(--shot-ratio,3/4)}
 .pick .name{display:block;padding:9px 11px;font-size:12.5px;font-weight:600;line-height:1.3}
 .pick:hover{border-color:var(--blue)}
@@ -587,9 +592,9 @@ function draw(){
     </article>`).join("");
 
   $("#picks").innerHTML = E.map((e,i) => `
-    <button class="pick" data-id="${e.id}" aria-pressed="false">
+    <div class="pick" data-id="${e.id}" role="button" tabindex="0" aria-pressed="false">
       ${shot(e,i)}<span class="name">${e.title}</span>
-    </button>`).join("");
+    </div>`).join("");
 
   $("#countLabel").textContent = E.length + " entries";
 }
@@ -683,11 +688,18 @@ document.addEventListener("keydown", ev => {
    ══════════════════════════════════════════════════════════ */
 let picked = null;
 $("#picks").addEventListener("click", ev => {
+  if(ev.target.closest(".zoom")) return;      // magnifier enlarges only
   const b = ev.target.closest(".pick"); if(!b) return;
   document.querySelectorAll(".pick").forEach(p => p.setAttribute("aria-pressed","false"));
   b.setAttribute("aria-pressed","true");
   picked = b.dataset.id;
   fail("");
+});
+$("#picks").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter" && ev.key !== " ") return;
+  const b = ev.target.closest(".pick"); if(!b) return;
+  ev.preventDefault();
+  b.click();
 });
 function fail(msg){ const el = $("#voteErr"); el.textContent = msg; el.classList.toggle("show", !!msg); }
 
