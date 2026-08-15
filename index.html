@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2026 Taejae University Academic Regalia Design contest</title>
+<title>2026 Taejae University Academic Regalia Design Competition</title>
 <meta name="description" content="Vote for the academic regalia that carries Taejae University's founding spirit. Bachelor's gown, cap and stole — designed by Taejae students and staff.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,19 +13,20 @@
 <style>
 /* ───────────────────────── tokens ───────────────────────── */
 :root{
-  --ink:#0B1420;        /* gown black-navy */
-  --navy:#14315E;       /* Taejae field navy */
-  --blue:#2F6BFF;       /* interactive accent */
-  --brass:#C0A265;      /* regalia trim */
+  --plum:#512C82;       /* Taejae purple — measured from the logo artwork */
+  --jade:#00A496;       /* Taejae teal — measured from the logo artwork */
+  --ink:#1C0F2E;        /* deep plum-black, for hero and footer */
+  --navy:#512C82;       /* alias so older rules resolve to plum */
+  --blue:#512C82;       /* interactive accent */
+  --blue-dark:#412168;  /* hover */
+  --brass:#00A496;      /* trim accents now carry the teal */
   --red:#C0304A;        /* deadline only — never decorative */
-  --plum:#512C82;       /* Taejae brand purple, from the logo */
-  --jade:#00A496;       /* Taejae brand teal, from the logo */
-  --paper:#EDEFF3;      /* cool pattern paper */
+  --paper:#F3F1F6;      /* very light lilac-grey page */
   --white:#fff;
-  --line:rgba(11,20,32,.14);
-  --line-soft:rgba(11,20,32,.08);
-  --muted:#5A6577;
-  --shadow:0 1px 2px rgba(11,20,32,.05),0 12px 32px -18px rgba(11,20,32,.35);
+  --line:rgba(28,15,46,.14);
+  --line-soft:rgba(28,15,46,.08);
+  --muted:#645A72;
+  --shadow:0 1px 2px rgba(28,15,46,.05),0 12px 32px -18px rgba(28,15,46,.35);
   --wrap:1180px;
   --display:"Instrument Serif",Georgia,serif;
   --body:"Archivo","Helvetica Neue",Arial,sans-serif;
@@ -68,7 +69,7 @@ nav a,nav button{
   background:none;border:0;padding:8px 12px;font-size:13.5px;font-weight:500;
   text-decoration:none;color:var(--muted);border-radius:6px;
 }
-nav a:hover,nav button:hover{color:var(--ink);background:rgba(11,20,32,.05)}
+nav a:hover,nav button:hover{color:var(--ink);background:rgba(81,44,130,.07)}
 @media(max-width:620px){ nav .hide-sm{display:none} .bar{height:58px} }
 
 /* ───────────────────────── hero ───────────────────────── */
@@ -78,12 +79,12 @@ nav a:hover,nav button:hover{color:var(--ink);background:rgba(11,20,32,.05)}
   background:
     repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 1px,transparent 1px 4px),
     repeating-linear-gradient(-45deg,rgba(255,255,255,.028) 0 1px,transparent 1px 4px),
-    radial-gradient(120% 90% at 78% -20%,rgba(47,107,255,.34),transparent 62%);
+    radial-gradient(120% 90% at 78% -20%,rgba(81,44,130,.62),transparent 64%);
 }
 .stole{position:absolute;top:-60px;right:9%;height:150%;width:210px;opacity:.85;pointer-events:none}
 .stole span{
-  position:absolute;top:0;height:100%;width:52px;background:linear-gradient(180deg,var(--navy),rgba(20,49,94,0));
-  border-left:1px solid rgba(192,162,101,.55);border-right:1px solid rgba(192,162,101,.28);
+  position:absolute;top:0;height:100%;width:52px;background:linear-gradient(180deg,var(--plum),rgba(81,44,130,0));
+  border-left:1px solid rgba(0,164,150,.6);border-right:1px solid rgba(0,164,150,.3);
 }
 .stole span:first-child{left:0;transform:rotate(6.5deg);transform-origin:top center}
 .stole span:last-child{right:0;transform:rotate(-6.5deg);transform-origin:top center}
@@ -94,7 +95,7 @@ h1{
   font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-height:1.02;
   font-size:clamp(42px,7.4vw,86px);margin:0 0 22px;max-width:15ch;
 }
-h1 em{font-style:italic;color:#A9C2FF}
+h1 em{font-style:italic;color:#00D8C4}
 .lede{font-size:clamp(16px,1.9vw,19.5px);line-height:1.62;max-width:56ch;color:rgba(237,239,243,.8);margin:0}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
 
@@ -106,7 +107,7 @@ h1 em{font-style:italic;color:#A9C2FF}
 }
 .btn:active{transform:translateY(1px)}
 .btn-primary{background:var(--blue);color:#fff}
-.btn-primary:hover{background:#1E57E8}
+.btn-primary:hover{background:var(--blue-dark)}
 .btn-ghost{border-color:rgba(237,239,243,.3);color:var(--paper)}
 .btn-ghost:hover{border-color:var(--paper);background:rgba(255,255,255,.06)}
 .btn-brass{background:var(--brass);color:#221A08}
@@ -130,11 +131,11 @@ section{padding:76px 0}
 .ballot{
   background:var(--white);border:1px solid var(--line-soft);border-radius:14px;
   padding:26px 30px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;
-  box-shadow:0 1px 2px rgba(11,20,32,.04),0 18px 40px -30px rgba(11,20,32,.5);
+  box-shadow:0 1px 2px rgba(28,15,46,.04),0 18px 40px -30px rgba(28,15,46,.5);
 }
 .ballot .badge{
   width:58px;height:58px;flex:none;border-radius:50%;display:grid;place-items:center;
-  background:#F3F0E6;border:1px solid rgba(192,162,101,.4);
+  background:#E6F5F3;border:1px solid rgba(0,164,150,.38);
 }
 .ballot .copy{flex:1;min-width:260px}
 .ballot h2{
@@ -166,24 +167,12 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
   background:repeating-linear-gradient(45deg,#E3E7ED 0 10px,#DCE1E9 10px 20px);color:#8B95A6;
   font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:16px;
 }
-.tag{
-  position:absolute;top:0;left:0;background:var(--ink);color:#fff;
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:6px 11px;z-index:2;
-}
-.card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
-.card-body h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
-.card-body .by{margin:0;font-size:13px;color:var(--muted)}
-.pdf{
-  margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;
-  border:1px solid var(--line);border-radius:2px;padding:10px 12px;font-size:13px;font-weight:600;
-  text-decoration:none;background:#fff;transition:background .15s,border-color .15s,color .15s;
-}
-.pdf:hover{background:var(--ink);border-color:var(--ink);color:#fff}
-.pdf svg{flex:none}
+.card-body{padding:14px 18px 16px}
+.card-body h3{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
 
 /* ───────────────────────── modals ───────────────────────── */
 .overlay{
-  position:fixed;inset:0;z-index:100;background:rgba(11,20,32,.62);backdrop-filter:blur(3px);
+  position:fixed;inset:0;z-index:100;background:rgba(28,15,46,.62);backdrop-filter:blur(3px);
   display:flex;align-items:flex-start;justify-content:center;padding:28px 16px;overflow:auto;
   opacity:0;pointer-events:none;transition:opacity .18s ease;
 }
@@ -197,7 +186,7 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 .sheet-head h2{font-family:var(--display);font-weight:400;font-size:clamp(23px,3.4vw,32px);margin:0;line-height:1.15}
 .sheet-head p{margin:8px 0 0;font-size:14px;color:var(--muted)}
 .x{background:none;border:0;font-size:24px;line-height:1;color:var(--muted);padding:4px 8px;border-radius:4px}
-.x:hover{background:rgba(11,20,32,.07);color:var(--ink)}
+.x:hover{background:rgba(81,44,130,.08);color:var(--ink)}
 
 /* lightbox */
 .lightbox{
@@ -224,10 +213,10 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 .lb-stage img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:2px}
 .lb-nav{
   position:absolute;top:50%;transform:translateY(-50%);width:46px;height:76px;
-  background:rgba(11,20,32,.5);border:1px solid rgba(237,239,243,.2);color:#fff;
+  background:rgba(28,15,46,.5);border:1px solid rgba(237,239,243,.2);color:#fff;
   border-radius:2px;font-size:22px;display:grid;place-items:center;
 }
-.lb-nav:hover{background:rgba(11,20,32,.85);border-color:rgba(237,239,243,.6)}
+.lb-nav:hover{background:rgba(28,15,46,.85);border-color:rgba(237,239,243,.6)}
 .lb-nav.prev{left:14px}
 .lb-nav.next{right:14px}
 .lb-count{
@@ -244,19 +233,13 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 .shot{cursor:zoom-in}
 .zoom{
   position:absolute;right:9px;bottom:9px;z-index:2;width:34px;height:34px;border-radius:50%;
-  background:rgba(11,20,32,.62);border:0;color:#fff;display:grid;place-items:center;
+  background:rgba(28,15,46,.62);border:0;color:#fff;display:grid;place-items:center;
   opacity:0;transition:opacity .16s ease,background .16s ease;
 }
 .card:hover .zoom,.pick:hover .zoom,.zoom:focus-visible{opacity:1}
 .zoom:hover{background:var(--ink)}
 @media(hover:none){.zoom{opacity:1}}
 
-/* statement viewer */
-.doc{max-width:1020px}
-.doc-frame{padding:18px 28px 28px}
-.doc-frame iframe{width:100%;height:min(76vh,880px);border:1px solid var(--line);border-radius:3px;background:#fff;display:block}
-.doc-frame .none{border:1px solid var(--line);border-radius:3px;background:#fff;padding:40px 26px;text-align:center;font-size:14.5px;color:var(--muted)}
-@media(max-width:620px){.doc-frame{padding:14px 18px 20px}.doc-frame iframe{height:70vh}}
 
 /* vote picker */
 .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 28px}
@@ -339,7 +322,7 @@ footer a{color:rgba(237,239,243,.85)}
       Open call · 2026
     </p>
     <h1>The gown that <em>Taejae</em> will graduate in.</h1>
-    <p class="lede">A contest to design the bachelor's regalia — gown, cap and stole — for a university with no fixed campus. Every entry is on show here. The Taejae community decides which one carries our founding spirit.</p>
+    <p class="lede">A competition to design the bachelor's regalia — gown, cap and stole — for a university with no fixed campus. Every entry is on show here. The Taejae community decides which one carries our founding spirit.</p>
     <div class="hero-cta">
       <button class="btn btn-primary" id="heroVote">Cast your vote</button>
       <a class="btn btn-ghost" href="#entries">See the entries</a>
@@ -369,9 +352,9 @@ footer a{color:rgba(237,239,243,.85)}
     <div class="ballot">
       <span class="badge" aria-hidden="true">
         <svg width="28" height="28" viewBox="0 0 28 28">
-          <path d="M8 4h12v6a6 6 0 0 1-12 0z" fill="none" stroke="#14315E" stroke-width="1.8"/>
-          <path d="M8 5H5v2a4 4 0 0 0 3.4 4M20 5h3v2a4 4 0 0 1-3.4 4" fill="none" stroke="#C0A265" stroke-width="1.6"/>
-          <path d="M14 16v4M10 24h8l-1.5-4h-5z" fill="none" stroke="#14315E" stroke-width="1.8"/>
+          <path d="M8 4h12v6a6 6 0 0 1-12 0z" fill="none" stroke="#512C82" stroke-width="1.8"/>
+          <path d="M8 5H5v2a4 4 0 0 0 3.4 4M20 5h3v2a4 4 0 0 1-3.4 4" fill="none" stroke="#00A496" stroke-width="1.6"/>
+          <path d="M14 16v4M10 24h8l-1.5-4h-5z" fill="none" stroke="#512C82" stroke-width="1.8"/>
         </svg>
       </span>
       <div class="copy">
@@ -397,7 +380,7 @@ footer a{color:rgba(237,239,243,.85)}
         <p class="eyebrow"><svg class="chev" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><path d="M1 4l10 6 10-6M1 1l10 6 10-6"/></svg> <span id="countLabel">Entries</span></p>
         <h2 class="section-title">The designs on show</h2>
       </div>
-      <p style="margin:0;color:var(--muted);font-size:14.5px;max-width:38ch">Every entry comes with a written statement explaining the thinking behind the gown, cap and stole.</p>
+      <p style="margin:0;color:var(--muted);font-size:14.5px;max-width:38ch">Tap any design to see it full size, then cast your vote.</p>
     </div>
     <div class="grid" id="cards"></div>
   </div>
@@ -405,7 +388,7 @@ footer a{color:rgba(237,239,243,.85)}
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 Taejae University · Academic Regalia Design contest</span>
+    <span>© 2026 Taejae University · Academic Regalia Design Competition</span>
     <span>22-8 Changdeokgung 5-gil, Jongno-gu, Seoul · <a href="mailto:info@taejae.ac.kr">info@taejae.ac.kr</a></span>
   </div>
 </footer>
@@ -415,7 +398,6 @@ footer a{color:rgba(237,239,243,.85)}
   <div class="lb-bar">
     <div class="who">
       <h3 id="lbTitle"></h3>
-      <small id="lbBy"></small>
     </div>
     <button id="lbClose" aria-label="Close">×</button>
   </div>
@@ -424,20 +406,6 @@ footer a{color:rgba(237,239,243,.85)}
     <img id="lbImg" alt="" draggable="false">
     <button class="lb-nav next" id="lbNext" aria-label="Next design">›</button>
     <span class="lb-count" id="lbCount"></span>
-  </div>
-</div>
-
-<!-- ── statement viewer ── -->
-<div class="overlay" id="docModal" role="dialog" aria-modal="true" aria-labelledby="docTitle">
-  <div class="sheet doc">
-    <div class="sheet-head">
-      <div>
-        <h2 id="docTitle">Design statement</h2>
-        <p id="docNote"></p>
-      </div>
-      <button class="x" data-close aria-label="Close">×</button>
-    </div>
-    <div class="doc-frame" id="docBody"></div>
   </div>
 </div>
 
@@ -467,7 +435,7 @@ footer a{color:rgba(237,239,243,.85)}
 <!-- ── thank you ── -->
 <div class="overlay" id="thanksModal" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
   <div class="sheet thanks">
-    <svg class="seal-lg" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#C0A265" stroke-width="1.5"/><path d="M17 28.5l7.5 7.5L39 21" fill="none" stroke="#14315E" stroke-width="3.2" stroke-linecap="square"/></svg>
+    <svg class="seal-lg" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#00A496" stroke-width="1.5"/><path d="M17 28.5l7.5 7.5L39 21" fill="none" stroke="#512C82" stroke-width="3.2" stroke-linecap="square"/></svg>
     <h2 id="thanksTitle">Thank you for submit!</h2>
     <p id="thanksMsg">Your vote has been recorded. Results are announced when voting closes on 31 August.</p>
     <button class="btn btn-primary" data-close style="justify-content:center">Close</button>
@@ -528,48 +496,38 @@ const CONFIG = {
      BG     margin colour seen when FIT is "contain".                 */
   RATIO: "3/4",
   FIT:   "contain",
-  BG:    "#F4F6F9",
+  BG:    "#F5F3F7",
 
-  /* Images live at images/image1 … image9 (extension auto-detected). */
+  /* Images live at images/entry1 … entry9 (extension auto-detected).
+     Change IMG_PREFIX if your files are named differently — the number
+     is always appended, so "entry" looks for entry1, entry2, entry3 … */
   IMG_DIR: "images/",
+  IMG_PREFIX: "entry",
   EXTENSIONS: ["jpg","png","jpeg","webp","JPG","PNG"],
 
   /* ── Enlarged view ──────────────────────────────────────────
      Clicking a card opens the image full screen. By default it
      looks for a separate high-resolution file first:
 
-         images/image1-full.jpg   ← shown enlarged
-         images/image1.jpg        ← shown on the card
+         images/entry1-full.jpg   ← shown enlarged
+         images/entry1.jpg        ← shown on the card
 
      If the -full file is missing, the card image is used instead,
      so this is entirely optional. Set FULL_SUFFIX to "" to always
      reuse the card image.                                        */
   FULL_SUFFIX: "-full",
 
-  /* ── Design statements ──────────────────────────────────────
-     Per entry, choose ONE:
-
-     drive:"FILE_ID"  Shown inside the page from Google Drive with
-                      download and print switched off. The PDF never
-                      enters this repository, so there is no public
-                      file address for anyone to grab. Recommended.
-
-     drive:""         Falls back to pdfs/pdfN.pdf in this repository.
-                      Simple, but that file is publicly downloadable
-                      by anyone who knows or guesses the address.     */
-  PDF_DIR: "pdfs/",
-
-  /* Edit `title`, `by` and `drive`. Leave `n` alone — it is the tally key. */
+  /* Edit `title` only. Leave `n` alone — it is the tally key. */
   ENTRIES: [
-    { n:1, title:"Entry 01", by:"Designer name", drive:"" },
-    { n:2, title:"Entry 02", by:"Designer name", drive:"" },
-    { n:3, title:"Entry 03", by:"Designer name", drive:"" },
-    { n:4, title:"Entry 04", by:"Designer name", drive:"" },
-    { n:5, title:"Entry 05", by:"Designer name", drive:"" },
-    { n:6, title:"Entry 06", by:"Designer name", drive:"" },
-    { n:7, title:"Entry 07", by:"Designer name", drive:"" },
-    { n:8, title:"Entry 08", by:"Designer name", drive:"" },
-    { n:9, title:"Entry 09", by:"Designer name", drive:"" }
+    { n:1, title:"Entry 01" },
+    { n:2, title:"Entry 02" },
+    { n:3, title:"Entry 03" },
+    { n:4, title:"Entry 04" },
+    { n:5, title:"Entry 05" },
+    { n:6, title:"Entry 06" },
+    { n:7, title:"Entry 07" },
+    { n:8, title:"Entry 08" },
+    { n:9, title:"Entry 09" }
   ]
 };
 
@@ -580,11 +538,10 @@ root.setProperty("--shot-bg",    CONFIG.BG);
 
 CONFIG.ENTRIES.forEach(e => {
   e.id  = "E" + e.n;
-  e.img = CONFIG.IMG_DIR + "image" + e.n;          // extension resolved on load
+  e.img = CONFIG.IMG_DIR + CONFIG.IMG_PREFIX + e.n;   // extension resolved on load
   e.full = CONFIG.FULL_SUFFIX
-    ? CONFIG.IMG_DIR + "image" + e.n + CONFIG.FULL_SUFFIX
+    ? CONFIG.IMG_DIR + CONFIG.IMG_PREFIX + e.n + CONFIG.FULL_SUFFIX
     : e.img;
-  e.pdf = CONFIG.PDF_DIR + "pdf" + e.n + ".pdf";   // used only when drive is empty
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -592,7 +549,6 @@ CONFIG.ENTRIES.forEach(e => {
    ══════════════════════════════════════════════════════════ */
 const $ = s => document.querySelector(s);
 const E = CONFIG.ENTRIES;
-const ICON = '<svg width="13" height="15" viewBox="0 0 13 15" aria-hidden="true"><path d="M1 1h7l4 4v9H1z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1v4h4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
 
 /* Walks a list of candidate URLs until one loads. Lets the enlarged view
    ask for image1-full.jpg first and quietly fall back to image1.jpg. */
@@ -616,7 +572,6 @@ window.imgFallback = function(img){
 function shot(e, i){
   const list = candidates(e.img);
   return `<div class="shot" data-zoom="${e.n}">
-      <span class="tag">${String(i+1).padStart(2,"0")}</span>
       <img src="${list[0]}" data-srcs='${JSON.stringify(list)}' data-i="0" data-label="${e.img}"
            alt="${e.title} — gown, cap and stole" loading="lazy" onerror="imgFallback(this)" draggable="false">
       <button class="zoom" data-zoom="${e.n}" aria-label="Enlarge ${e.title}">
@@ -628,11 +583,7 @@ function shot(e, i){
 function draw(){
   $("#cards").innerHTML = E.map((e,i) => `<article class="card">
       ${shot(e,i)}
-      <div class="card-body">
-        <h3>${e.title}</h3>
-        <p class="by">${e.by}</p>
-        <button class="pdf" data-doc="${e.n}">${ICON} Design statement</button>
-      </div>
+      <div class="card-body"><h3>${e.title}</h3></div>
     </article>`).join("");
 
   $("#picks").innerHTML = E.map((e,i) => `
@@ -657,7 +608,6 @@ function open(id){
 }
 function close(el){
   el.classList.remove("open");
-  if(el.id === "docModal") $("#docBody").innerHTML = "";   // stop the frame loading
   if(!document.querySelector(".overlay.open")) document.body.style.overflow = "";
   if(lastFocus) lastFocus.focus();
 }
@@ -692,7 +642,6 @@ function showAt(i){
   img.alt = e.title + " — gown, cap and stole";
   img.src = list[0];
   $("#lbTitle").textContent = e.title;
-  $("#lbBy").textContent    = e.by;
   $("#lbCount").textContent = (lbAt + 1) + " / " + E.length;
 }
 function openLb(n){
@@ -730,31 +679,7 @@ document.addEventListener("keydown", ev => {
 });
 
 /* ══════════════════════════════════════════════════════════
-   5. Statement viewer
-   ══════════════════════════════════════════════════════════ */
-document.addEventListener("click", ev => {
-  const b = ev.target.closest("[data-doc]"); if(!b) return;
-  const e = E.find(x => String(x.n) === b.dataset.doc); if(!e) return;
-
-  $("#docTitle").textContent = e.title;
-  if(e.drive){
-    /* Drive's /preview path renders the file with no download or print
-       control, and never reveals the underlying file address. */
-    $("#docNote").textContent = "View only — this document cannot be downloaded or printed.";
-    $("#docBody").innerHTML =
-      '<iframe src="https://drive.google.com/file/d/' + e.drive +
-      '/preview" title="Design statement" allow="" referrerpolicy="no-referrer"></iframe>';
-  }else{
-    $("#docNote").textContent = e.by;
-    $("#docBody").innerHTML =
-      '<iframe src="' + e.pdf + '#toolbar=0&navpanes=0" title="Design statement"></iframe>';
-  }
-  open("#docModal");
-});
-$("#docModal").addEventListener("contextmenu", ev => ev.preventDefault());
-
-/* ══════════════════════════════════════════════════════════
-   6. Voting
+   5. Voting
    ══════════════════════════════════════════════════════════ */
 let picked = null;
 $("#picks").addEventListener("click", ev => {
@@ -824,7 +749,7 @@ $("#submitVote").addEventListener("click", async () => {
 });
 
 /* ══════════════════════════════════════════════════════════
-   7. Admin results
+   6. Admin results
    ══════════════════════════════════════════════════════════ */
 let tally = null;
 async function loadResults(){
