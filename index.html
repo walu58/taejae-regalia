@@ -167,8 +167,15 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
   background:repeating-linear-gradient(45deg,#E3E7ED 0 10px,#DCE1E9 10px 20px);color:#8B95A6;
   font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:16px;
 }
-.card-body{padding:14px 18px 16px}
-.card-body h3{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.card-body{padding:16px 18px 20px;text-align:center}
+.card-body h3{
+  font-family:var(--display);font-weight:400;font-size:21px;letter-spacing:.005em;
+  line-height:1.2;margin:0;position:relative;padding-top:14px;
+}
+.card-body h3::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:26px;height:2px;background:var(--jade);
+}
 
 /* ───────────────────────── modals ───────────────────────── */
 .overlay{
@@ -244,14 +251,17 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 /* vote picker */
 .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 28px;align-items:start}
 @media(max-width:600px){.picks{gap:8px;padding:14px}}
-@media(max-width:420px){.picks{gap:6px;padding:12px}.pick .name{padding:6px 7px;font-size:11px}}
+@media(max-width:420px){.picks{gap:6px;padding:12px}.pick .name{padding:7px 5px 8px;font-size:13px}}
 .pick{
   background:#fff;border:1px solid var(--line-soft);border-radius:3px;padding:0;overflow:hidden;
   text-align:left;position:relative;cursor:pointer;user-select:none;
   transition:border-color .15s,box-shadow .15s;
 }
 .pick .shot{aspect-ratio:var(--shot-ratio,3/4)}
-.pick .name{display:block;padding:9px 11px;font-size:12.5px;font-weight:600;line-height:1.3}
+.pick .name{
+  display:block;padding:10px 8px 12px;text-align:center;line-height:1.25;
+  font-family:var(--display);font-weight:400;font-size:16px;
+}
 .pick:hover{border-color:var(--blue)}
 .pick[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
 .pick[aria-pressed="true"]::after{
@@ -420,7 +430,7 @@ footer a{color:rgba(237,239,243,.85)}
     <div class="sheet-head">
       <div>
         <h2 id="voteTitle">Pick the image that impressed you most.</h2>
-        <p>Select one design, then confirm with your Taejae email.</p>
+        <p id="voteSub">Select one design, then confirm with your Taejae email.</p>
       </div>
       <button class="x" data-close aria-label="Close">×</button>
     </div>
@@ -524,15 +534,15 @@ const CONFIG = {
 
   /* Edit `title` only. Leave `n` alone — it is the tally key. */
   ENTRIES: [
-    { n:1, title:"Entry 01" },
-    { n:2, title:"Entry 02" },
-    { n:3, title:"Entry 03" },
-    { n:4, title:"Entry 04" },
-    { n:5, title:"Entry 05" },
-    { n:6, title:"Entry 06" },
-    { n:7, title:"Entry 07" },
-    { n:8, title:"Entry 08" },
-    { n:9, title:"Entry 09" }
+    { n:1, title:"Design 1" },
+    { n:2, title:"Design 2" },
+    { n:3, title:"Design 3" },
+    { n:4, title:"Design 4" },
+    { n:5, title:"Design 5" },
+    { n:6, title:"Design 6" },
+    { n:7, title:"Design 7" },
+    { n:8, title:"Design 8" },
+    { n:9, title:"Design 9" }
   ]
 };
 
@@ -596,7 +606,9 @@ function draw(){
       ${shot(e,i)}<span class="name">${e.title}</span>
     </div>`).join("");
 
-  $("#countLabel").textContent = E.length + " entries";
+  $("#countLabel").textContent = E.length + " designs";
+  $("#voteSub").textContent =
+    "Select one of the " + E.length + " designs below, then confirm with your Taejae email.";
 }
 draw();
 
