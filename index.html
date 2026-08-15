@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2026 Taejae University Academic Regalia Design contest</title>
+<title>2026 Taejae University Academic Regalia Design Contest</title>
 <meta name="description" content="Vote for the academic regalia that carries Taejae University's founding spirit. Bachelor's gown, cap and stole — designed by Taejae students and staff.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -242,8 +242,8 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 
 
 /* vote picker */
-.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 28px}
-@media(max-width:720px){.picks{grid-template-columns:repeat(2,minmax(0,1fr));padding:18px}}
+.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 28px;align-items:start}
+@media(max-width:600px){.picks{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px}}
 .pick{background:#fff;border:1px solid var(--line-soft);border-radius:3px;padding:0;overflow:hidden;text-align:left;position:relative;transition:border-color .15s,box-shadow .15s}
 .pick .shot{aspect-ratio:var(--shot-ratio,3/4)}
 .pick .name{display:block;padding:9px 11px;font-size:12.5px;font-weight:600;line-height:1.3}
@@ -388,7 +388,7 @@ footer a{color:rgba(237,239,243,.85)}
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 Taejae University · Academic Regalia Design contest</span>
+    <span>© 2026 Taejae University · Academic Regalia Design Contest</span>
     <span>22-8 Changdeokgung 5-gil, Jongno-gu, Seoul · <a href="mailto:oaa-student@taejae.ac.kr">oaa-student@taejae.ac.kr</a></span>
   </div>
 </footer>
@@ -403,7 +403,7 @@ footer a{color:rgba(237,239,243,.85)}
   </div>
   <div class="lb-stage">
     <button class="lb-nav prev" id="lbPrev" aria-label="Previous design">‹</button>
-    <img id="lbImg" alt="" draggable="false">
+    <img id="lbImg" alt="" draggable="false" onerror="imgFallback(this)">
     <button class="lb-nav next" id="lbNext" aria-label="Next design">›</button>
     <span class="lb-count" id="lbCount"></span>
   </div>
