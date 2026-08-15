@@ -195,6 +195,14 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
 .x{background:none;border:0;font-size:24px;line-height:1;color:var(--muted);padding:4px 8px;border-radius:4px}
 .x:hover{background:rgba(81,44,130,.08);color:var(--ink)}
 
+.hint{
+  margin:8px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--muted);opacity:.85;display:flex;align-items:flex-start;gap:7px;line-height:1.5;
+}
+.hint::before{
+  content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--jade);margin-top:6px;
+}
+
 /* lightbox */
 .lightbox{
   position:fixed;inset:0;z-index:200;background:rgba(6,11,18,.94);
@@ -235,6 +243,20 @@ h2.section-title{font-family:var(--display);font-weight:400;font-size:clamp(28px
   .lb-bar h3{font-size:17px}
   .lb-stage{padding:0 8px 46px}
 }
+
+.lb-loading{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(237,239,243,.72);pointer-events:none;
+}
+.lb-loading .spin{
+  width:15px;height:15px;border-radius:50%;flex:none;
+  border:2px solid rgba(237,239,243,.25);border-top-color:var(--jade);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.lb-loading .spin{animation:none}}
 
 /* zoom affordance on cards */
 .shot{cursor:zoom-in}
@@ -393,9 +415,12 @@ footer a{color:rgba(237,239,243,.85)}
     <div class="entries-head">
       <div>
         <p class="eyebrow"><svg class="chev" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><path d="M1 4l10 6 10-6M1 1l10 6 10-6"/></svg> <span id="countLabel">Entries</span></p>
-        <h2 class="section-title">The designs on show</h2>
+        <h2 class="section-title">Nine visions for one gown</h2>
       </div>
-      <p style="margin:0;color:var(--muted);font-size:14.5px;max-width:38ch">Tap any design to see it full size, then cast your vote.</p>
+      <div style="max-width:38ch">
+        <p style="margin:0;color:var(--muted);font-size:14.5px">Tap any design to see it full size, then cast your vote.</p>
+        <p class="hint">Full-size images are large — they may take a moment to appear.</p>
+      </div>
     </div>
     <div class="grid" id="cards"></div>
   </div>
@@ -419,6 +444,9 @@ footer a{color:rgba(237,239,243,.85)}
   <div class="lb-stage">
     <button class="lb-nav prev" id="lbPrev" aria-label="Previous design">‹</button>
     <img id="lbImg" alt="" draggable="false" onerror="imgFallback(this)">
+    <span class="lb-loading" id="lbLoading" hidden>
+      <span class="spin" aria-hidden="true"></span>Loading full-size image…
+    </span>
     <button class="lb-nav next" id="lbNext" aria-label="Next design">›</button>
     <span class="lb-count" id="lbCount"></span>
   </div>
@@ -578,7 +606,12 @@ window.imgFallback = function(img){
     img.src = list[i];
     return;
   }
-  if(img.dataset.quiet === "1"){ img.removeAttribute("src"); return; }
+  if(img.dataset.quiet === "1"){
+    img.removeAttribute("src");
+    const l = document.getElementById("lbLoading");
+    if(l){ l.hidden = false; l.textContent = "This image could not be loaded."; }
+    return;
+  }
   const p = img.parentNode, label = img.dataset.label || "";
   img.remove();
   p.insertAdjacentHTML("beforeend", '<div class="no-img">Image pending<br>' + label + '.jpg</div>');
@@ -657,6 +690,10 @@ function showAt(i){
   img.dataset.i = "0";
   img.dataset.quiet = "1";
   img.alt = e.title + " — gown, cap and stole";
+  img.style.visibility = "hidden";
+  const load = $("#lbLoading");
+  load.hidden = false;
+  load.innerHTML = '<span class="spin" aria-hidden="true"></span>Loading full-size image…';
   img.src = list[0];
   $("#lbTitle").textContent = e.title;
   $("#lbCount").textContent = (lbAt + 1) + " / " + E.length;
@@ -669,6 +706,7 @@ function openLb(n){
 }
 function closeLb(){
   lb.classList.remove("open");
+  $("#lbLoading").hidden = true;
   $("#lbImg").removeAttribute("src");
   if(!document.querySelector(".overlay.open")) document.body.style.overflow = "";
 }
@@ -682,6 +720,10 @@ document.addEventListener("click", ev => {
     ev.preventDefault(); ev.stopPropagation();
     openLb(z.dataset.zoom);
   }
+});
+$("#lbImg").addEventListener("load", () => {
+  $("#lbImg").style.visibility = "visible";
+  $("#lbLoading").hidden = true;
 });
 $("#lbClose").addEventListener("click", closeLb);
 $("#lbPrev").addEventListener("click", () => showAt(lbAt - 1));
