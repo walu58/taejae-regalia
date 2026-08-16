@@ -304,10 +304,40 @@ input::placeholder{color:#9AA3B2}
 .err.show{display:block}
 
 /* thank you */
-.thanks{max-width:480px;text-align:center;padding:46px 34px 40px;background:var(--paper);border-radius:4px}
-.thanks .seal-lg{width:56px;height:56px;margin:0 auto 20px}
-.thanks h2{font-family:var(--display);font-weight:400;font-size:34px;margin:0 0 10px}
-.thanks p{margin:0 0 26px;color:var(--muted);font-size:15px}
+.thanks{
+  max-width:440px;text-align:center;padding:50px 38px 38px;border-radius:14px;
+  background:var(--white);position:relative;overflow:hidden;
+}
+.thanks::before{                       /* a soft plum wash behind the seal */
+  content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+  width:340px;height:240px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(81,44,130,.13),transparent);
+  pointer-events:none;
+}
+.thanks > *{position:relative}
+.seal-lg{
+  width:76px;height:76px;margin:0 auto 22px;border-radius:50%;
+  background:#F1ECF8;border:1px solid rgba(81,44,130,.18);
+  display:grid;place-items:center;
+}
+.seal-lg svg{width:36px;height:36px;display:block}
+.seal-lg .tick{
+  stroke:var(--plum);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:34;stroke-dashoffset:34;
+}
+.overlay.open .seal-lg .tick{animation:tick .45s .12s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes tick{to{stroke-dashoffset:0}}
+.seal-lg .ring{fill:none;stroke:var(--jade);stroke-width:1.6;opacity:.55}
+.thanks h2{
+  font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:-.01em;
+  line-height:1.05;margin:0 0 12px;
+}
+.thanks p{
+  margin:0 auto 28px;color:var(--muted);font-size:14px;line-height:1.55;max-width:30ch;
+}
+.thanks .rule{width:30px;height:2px;background:var(--jade);margin:0 auto 16px}
+.thanks .btn{min-width:150px;justify-content:center;border-radius:2px}
+@media(prefers-reduced-motion:reduce){.overlay.open .seal-lg .tick{animation:none;stroke-dashoffset:0}}
 
 /* admin */
 .adm-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:22px 28px 4px}
@@ -479,9 +509,15 @@ footer a{color:rgba(237,239,243,.85)}
 <!-- ── thank you ── -->
 <div class="overlay" id="thanksModal" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
   <div class="sheet thanks">
-    <svg class="seal-lg" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="#00A496" stroke-width="1.5"/><path d="M17 28.5l7.5 7.5L39 21" fill="none" stroke="#512C82" stroke-width="3.2" stroke-linecap="square"/></svg>
-    <h2 id="thanksTitle">Thank you for submit!</h2>
-    <p id="thanksMsg">Your vote has been recorded. Results are announced when voting closes on 31 August.</p>
+    <span class="seal-lg" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <circle class="ring" cx="20" cy="20" r="18"/>
+        <path class="tick" d="M12 20.5l5.5 5.5L28 15"/>
+      </svg>
+    </span>
+    <div class="rule"></div>
+    <h2 id="thanksTitle">Thank you!</h2>
+    <p id="thanksMsg">Your submission has been sent!</p>
     <button class="btn btn-primary" data-close style="justify-content:center">Close</button>
   </div>
 </div>
@@ -525,7 +561,7 @@ footer a{color:rgba(237,239,243,.85)}
    ══════════════════════════════════════════════════════════ */
 const CONFIG = {
   /* Google Apps Script Web App URL. Empty = preview mode, votes not saved. */
-  ENDPOINT: "https://script.google.com/macros/s/AKfycbyHdQLew3QQ1TGfRLvaqJGAmkhrfSXEUQNBvP9w7Ip5u2Kjp5yNH9fsrFt3JZzfefDL/exec",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbzR1-CD2YTzPKXHQNs3IT3gPrefkQXss5KddGZZEuFoMOzF8AVCYNHw4EKrxo8B4prpXA/exec",
 
   /* Only these email addresses may vote. */
   ALLOWED_DOMAIN: "@taejae.ac.kr",
@@ -797,15 +833,15 @@ $("#submitVote").addEventListener("click", async () => {
   try{
     const res = await post({ action:"vote", entry:picked, email });
     if(res.preview){
-      $("#thanksMsg").textContent = "Preview mode — connect the results sheet to start saving votes.";
+      $("#thanksMsg").textContent = "Preview mode — the results sheet is not connected yet.";
     }else if(res.status === "closed"){
       return fail("Voting has closed.");
     }else if(res.status === "updated"){
-      $("#thanksMsg").textContent = "Your earlier vote has been moved to this design. One vote per member still stands.";
+      $("#thanksMsg").textContent = "Your vote has been moved to this design — one vote per member.";
     }else if(!res.ok){
       return fail(DIAG[res.code] || res.error || "Could not save your vote. Try again in a moment.");
     }else{
-      $("#thanksMsg").textContent = "Your vote has been recorded. Results are announced when voting closes on 31 August.";
+      $("#thanksMsg").textContent = "Your submission has been sent!";
     }
     close($("#voteModal")); open("#thanksModal");
     $("#email").value = ""; picked = null;
